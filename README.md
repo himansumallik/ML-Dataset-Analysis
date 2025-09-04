@@ -52,22 +52,46 @@ ML-End-to-End-Project/
 
 Follow these steps to run the project on your system or in Google Colab.  
 
-### 1. Clone the Repository  
+## 🔹 How to Run
+
+Follow these steps to run the project locally or in Google Colab.
+
+### 1. Clone the repository
 ```bash
 git clone https://github.com/your-username/ML-End-to-End-Project.git
 cd ML-End-to-End-Project
-2. Create Virtual Environment (Recommended)
-bash
-Copy code
+```
+
+### 2. Create virtual environment (recommended)
+```bash
 python -m venv venv
-source venv/bin/activate    # On Linux/Mac
-venv\Scripts\activate       # On Windows
-3. Install Dependencies
-bash
-Copy code
+```
+
+Activate the virtual environment:
+
+- On Linux / macOS:
+```bash
+source venv/bin/activate
+```
+
+- On Windows (PowerShell):
+```powershell
+venv\Scripts\Activate.ps1
+```
+
+- On Windows (cmd):
+```bat
+venv\Scripts\activate.bat
+```
+
+### 3. Install dependencies
+```bash
 pip install -r requirements.txt
-4. Run Jupyter Notebook
-bash
-Copy code
+```
+
+### 4. Run Jupyter Notebook
+```bash
 jupyter notebook
-Then open the desired notebook inside the notebooks/ folder and execute cells step by step.
+```
+Then open the desired notebook inside the `notebooks/` folder and execute cells step by step.
+
