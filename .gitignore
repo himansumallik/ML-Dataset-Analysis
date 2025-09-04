@@ -1,0 +1,10 @@
+# dataset folder
+data/
+*.zip
+
+# Python cache
+__pycache__/
+*.pyc
+
+# virtual environment 
+venv/
