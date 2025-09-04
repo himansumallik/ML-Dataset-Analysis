@@ -56,7 +56,7 @@ Follow these steps to run the project on your system or in Google Colab.
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/ML-End-to-End-Project.git
+git clone https://github.com/himansumallik/ML-Dataset-Analysis.git
 cd ML-End-to-End-Project
 ```
 
