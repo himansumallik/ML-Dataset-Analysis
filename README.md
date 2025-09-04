@@ -54,10 +54,6 @@ ML-End-to-End-Project/
 
 Follow these steps to run the project on your system or in Google Colab.  
 
-## 🔹 How to Run
-
-Follow these steps to run the project locally or in Google Colab.
-
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/your-username/ML-End-to-End-Project.git
