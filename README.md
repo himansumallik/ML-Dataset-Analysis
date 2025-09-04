@@ -28,6 +28,7 @@ This project demonstrates an **end-to-end machine learning workflow** using a si
 ---
 
 ## 🔹 Project Structure  
+```bash
 ML-End-to-End-Project/
 │── data/ # pasim-Synthetic Financial Datasets For Fraud Detection
 │── notebooks/ # Jupyter/Colab notebooks
@@ -36,7 +37,7 @@ ML-End-to-End-Project/
 │── src/data_loader.py
 │── README.md # Project description
 │── requirements.txt # Python dependencies
-
+```
 
 ---
 
