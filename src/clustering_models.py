@@ -27,29 +27,20 @@
 # plt.show()
 
 import pandas as pd
-from sklearn.datasets import load_iris
-from sklearn.mixture import GaussianMixture
 import matplotlib.pyplot as plt
+from sklearn.mixture import GaussianMixture
 
-# Load Iris dataset
-iris = load_iris()
-X = iris.data  # all features
+# Load Mall Customers dataset
+df = pd.read_csv("data/Mall_Customers.csv")
+X = df[['Annual Income (k$)', 'Spending Score (1-100)']]
 
-# Apply Gaussian Mixture Model
-gmm = GaussianMixture(n_components=3, random_state=42)
-gmm.fit(X)
-labels = gmm.predict(X)
+# Apply GMM
+gmm = GaussianMixture(n_components=5, random_state=42)
+labels = gmm.fit_predict(X)
 
-# Add cluster labels to DataFrame
-df = pd.DataFrame(X, columns=iris.feature_names)
-df['Cluster'] = labels
-
-# Show first 5 rows
-print(df.head())
-
-# Plot clusters (first two features)
-plt.scatter(df.iloc[:, 0], df.iloc[:, 1], c=df['Cluster'], cmap='viridis')
-plt.xlabel(iris.feature_names[0])
-plt.ylabel(iris.feature_names[1])
-plt.title("GMM Clustering - Iris Dataset")
+# Plot clusters
+plt.scatter(X['Annual Income (k$)'], X['Spending Score (1-100)'], c=labels, cmap='viridis')
+plt.xlabel("Annual Income")
+plt.ylabel("Spending Score")
+plt.title("Gaussian Mixture Clustering - Mall Customers")
 plt.show()
