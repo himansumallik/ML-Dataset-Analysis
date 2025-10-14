@@ -1,46 +1,53 @@
-# import pandas as pd
-# from sklearn.datasets import load_iris
-# from sklearn.cluster import KMeans
-# import matplotlib.pyplot as plt
-
-# # Load Iris dataset
-# iris = load_iris()
-# X = iris.data  # features
-
-# # Apply K-Means
-# kmeans = KMeans(n_clusters=3, random_state=42)
-# kmeans.fit(X)
-# labels = kmeans.labels_
-
-# # Add cluster labels to DataFrame
-# df = pd.DataFrame(X, columns=iris.feature_names)
-# df['Cluster'] = labels
-
-# # Show first 5 rows
-# print(df.head())
-
-# # Plot clusters (first two features)
-# plt.scatter(df.iloc[:, 0], df.iloc[:, 1], c=df['Cluster'], cmap='viridis')
-# plt.xlabel(iris.feature_names[0])
-# plt.ylabel(iris.feature_names[1])
-# plt.title("K-Means Clustering - Iris Dataset")
-# plt.show()
-
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
+from sklearn.preprocessing import StandardScaler
+from scipy.cluster.hierarchy import dendrogram, linkage
 
-# Load Mall Customers dataset
-df = pd.read_csv("data/Mall_Customers.csv")
-X = df[['Annual Income (k$)', 'Spending Score (1-100)']]
+# -------------------- K-MEANS CLUSTERING (Iris Dataset) --------------------
+print("\n=== K-Means Clustering on Iris Dataset ===")
+iris = load_iris()
+X_iris = iris.data
 
-# Apply GMM
+kmeans = KMeans(n_clusters=3, random_state=42)
+iris_labels = kmeans.fit_predict(X_iris)
+
+df_iris = pd.DataFrame(X_iris, columns=iris.feature_names)
+df_iris["Cluster"] = iris_labels
+print(df_iris.head())
+
+plt.scatter(df_iris.iloc[:, 0], df_iris.iloc[:, 1], c=df_iris["Cluster"], cmap="viridis")
+plt.xlabel(iris.feature_names[0])
+plt.ylabel(iris.feature_names[1])
+plt.title("K-Means Clustering - Iris Dataset")
+plt.show()
+
+# -------------------- GAUSSIAN MIXTURE MODEL (Mall Customers) --------------------
+print("\n=== Gaussian Mixture Model on Mall Customers Dataset ===")
+df_mall = pd.read_csv("data/Mall_Customers.csv")
+X_mall = df_mall[["Annual Income (k$)", "Spending Score (1-100)"]]
+
 gmm = GaussianMixture(n_components=5, random_state=42)
-labels = gmm.fit_predict(X)
+gmm_labels = gmm.fit_predict(X_mall)
 
-# Plot clusters
-plt.scatter(X['Annual Income (k$)'], X['Spending Score (1-100)'], c=labels, cmap='viridis')
-plt.xlabel("Annual Income")
-plt.ylabel("Spending Score")
+plt.scatter(X_mall["Annual Income (k$)"], X_mall["Spending Score (1-100)"], c=gmm_labels, cmap="viridis")
+plt.xlabel("Annual Income (k$)")
+plt.ylabel("Spending Score (1-100)")
 plt.title("Gaussian Mixture Clustering - Mall Customers")
+plt.show()
+
+# -------------------- HIERARCHICAL CLUSTERING (Mall Customers) --------------------
+print("\n=== Hierarchical Clustering on Mall Customers Dataset ===")
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_mall)
+
+linked = linkage(X_scaled, method="ward")
+
+plt.figure(figsize=(10, 6))
+dendrogram(linked, labels=df_mall["CustomerID"].values, orientation="top", distance_sort="descending", show_leaf_counts=False)
+plt.title("Hierarchical Clustering Dendrogram - Mall Customers")
+plt.xlabel("Customer ID")
+plt.ylabel("Distance")
 plt.show()
